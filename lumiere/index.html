@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="LUMIÈRE — an interactive photography gallery with search, filters, uploads and favourites.">
+  <title>LUMIÈRE | Immersive Gallery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#gallery-section">Skip to gallery</a>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="#home" class="logo">LUMIÈRE <span>✦</span></a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#gallery-section">Gallery</a>
+      <a href="#about">About</a>
+    </div>
+
+    <button id="themeBtn" class="icon-btn" aria-label="Switch theme">☀</button>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">A CURATED VISUAL EXPERIENCE / 2026</span>
+      <h1>Every frame<br>tells a <em>story.</em></h1>
+      <p>Discover extraordinary beauty in ordinary moments. A collection of places, perspectives and everything in between.</p>
+      <a href="#gallery-section" class="primary-btn">Explore Gallery ↗</a>
+    </div>
+    <span class="hero-index">01 — THE ART OF SEEING</span>
+  </header>
+
+  <main>
+    <section class="intro" id="about">
+      <span class="eyebrow">WELCOME TO LUMIÈRE</span>
+      <h2>A little wonder, in every frame.</h2>
+      <p>From quiet landscapes to architectural poetry, explore a thoughtfully curated visual archive.</p>
+
+      <div class="stats">
+        <div><strong id="totalCount">0</strong><span>Photographs</span></div>
+        <div><strong>05</strong><span>Collections</span></div>
+        <div><strong id="savedCount">0</strong><span>Saved Moments</span></div>
+      </div>
+    </section>
+
+    <section class="archive" id="gallery-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">EXPLORE / THE ARCHIVE</span>
+          <h2>The Collection<span class="accent">.</span></h2>
+        </div>
+        <p id="resultCount" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search photographs..." aria-label="Search photographs">
+        </label>
+
+        <div class="toolbar-actions">
+          <select id="sortSelect" aria-label="Sort photographs">
+            <option value="default">Featured order</option>
+            <option value="az">Title: A to Z</option>
+            <option value="za">Title: Z to A</option>
+            <option value="category">By category</option>
+            <option value="newest">Newest first</option>
+          </select>
+
+          <button id="masonryBtn" class="tool-btn active" aria-label="Masonry layout" aria-pressed="true">▦</button>
+          <button id="gridBtn" class="tool-btn" aria-label="Grid layout" aria-pressed="false">▥</button>
+
+          <button id="uploadBtn" class="primary-btn upload-btn">＋ Add Photos</button>
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden aria-label="Upload photographs">
+        </div>
+      </div>
+
+      <p class="upload-note">Upload JPG, PNG, WebP or GIF images (maximum 10 MB each). Uploaded photos remain in this browser session.</p>
+
+      <div class="filters" id="filters" role="group" aria-label="Filter photographs">
+        <button class="filter active" data-category="All" aria-pressed="true">All Photos</button>
+        <button class="filter" data-category="Nature" aria-pressed="false">Nature</button>
+        <button class="filter" data-category="Ocean" aria-pressed="false">Ocean</button>
+        <button class="filter" data-category="Sky" aria-pressed="false">Sky</button>
+        <button class="filter" data-category="Architecture" aria-pressed="false">Architecture</button>
+        <button class="filter" data-category="Flowers" aria-pressed="false">Flowers</button>
+        <button class="filter" data-category="Personal" aria-pressed="false">My Uploads</button>
+        <button class="filter" data-category="Saved" aria-pressed="false">♡ Saved</button>
+      </div>
+
+      <p id="uploadStatus" role="status" aria-live="polite" class="status-message"></p>
+
+      <div class="gallery" id="gallery"></div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <h3>No photographs found.</h3>
+        <p>Try another search or explore a different collection.</p>
+        <button id="resetBtn" class="primary-btn">Show all photos</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- FULLSCREEN LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer" tabindex="-1" hidden>
+    <div class="lightbox-top">
+      <span id="lightboxCounter"></span>
+      <button id="closeBtn" class="lightbox-close" aria-label="Close viewer">✕</button>
+    </div>
+
+    <button id="prevBtn" class="lightbox-arrow prev" aria-label="Previous photograph">❮</button>
+    <img id="lightboxImage" alt="">
+    <button id="nextBtn" class="lightbox-arrow next" aria-label="Next photograph">❯</button>
+
+    <div class="lightbox-bottom">
+      <div>
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxCategory"></p>
+      </div>
+      <a id="originalBtn" class="download-btn" target="_blank" rel="noopener">View Original ↗</a>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <a href="#home" class="logo">LUMIÈRE <span>✦</span></a>
+      <p>Collecting moments, one frame at a time.</p>
+    </div>
+    <p>CodeAlpha Frontend Internship · Task 01</p>
+    <p>© 2026 LUMIÈRE</p>
+  </footer>
+
+  <button id="backToTop" aria-label="Back to top">↑</button>
+</body>
+</html>
